@@ -1,15 +1,25 @@
-import React from "react";
 import { View, Text, Image } from "react-native";
+import React from "react";
 
-export default function About(props) {
-  const { name, image, price, reviews, rating, categories } =
-    props.route.params;
+const yelpRestaurantInfo = {
+  name: "Keagan's Imaginary Sushi Bar",
+  image:
+    "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c3VzaGl8ZW58MHx8MHx8&w=1000&q=80",
+  price: "$$",
+  reviews: "1573",
+  rating: 4,
+  categories: [{ title: "Seafood" }, { title: "Comfort Food" }],
+};
 
-  const formattedCategories = categories.map((cat) => cat.title).join(" • ");
+const { name, image, price, reviews, rating, categories } = yelpRestaurantInfo;
 
-  const description = `${formattedCategories} ${
-    price ? " • " + price : ""
-  } • 🎫 • ${rating} ⭐ (${reviews}+)`;
+const formattedCategories = categories.map((cat) => cat.title).join(" • ");
+
+const description = `${formattedCategories} ${
+  price ? " • " + price : ""
+} • 🎫 • ${rating} ⭐ (${reviews}+)`;
+
+export default function About() {
   return (
     <View>
       <RestaurantImage image={image} />

@@ -12,6 +12,7 @@ const YELP_API_KEY =
   "iKJhoRtWhN6crYpFsAJcd2iz2DLvPMNsitOi88e9rg8UVO-12lK4wzOPU5Js4RA21FPA-SQtomWVa8JibgPFbrN4uUUl6Knr4D4MYud0zwmZToCXgi4XZ_QGpaZBY3Yx";
 
 export default function Home() {
+  console.log("test");
   const [optionData, setOptionData] = useState(localOptions);
   const [city, setCity] = useState("San Francisco");
 
