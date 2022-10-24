@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import RestaurantDetail from "../screens/RestaurantDetail";
 
 export const localOptions = [
   {
@@ -32,19 +33,34 @@ export const localOptions = [
   },
 ];
 
-export default function SearchItems(props) {
+export default function SearchItems({ navigation, ...props }) {
   return (
-    <TouchableOpacity activeOpacity={1} style={{ marginBottom: 30 }}>
+    <>
       {props.optionData.map((option, index) => (
-        <View
+        <TouchableOpacity
           key={index}
-          style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}
+          activeOpacity={1}
+          style={{ marginBottom: 30 }}
+          onPress={() =>
+            navigation.navigate("RestaurantDetail", {
+              name: option.name,
+              image: option.image_url,
+              price: option.price,
+              reviews: option.review_count,
+              rating: option.rating,
+              categories: option.categories,
+            })
+          }
         >
-          <OptionImage image={option.image_url} />
-          <OptionInfo name={option.name} rating={option.rating} />
-        </View>
+          <View
+            style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}
+          >
+            <OptionImage image={option.image_url} />
+            <OptionInfo name={option.name} rating={option.rating} />
+          </View>
+        </TouchableOpacity>
       ))}
-    </TouchableOpacity>
+    </>
   );
 }
 
