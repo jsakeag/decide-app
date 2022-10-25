@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import RestaurantDetail from "../screens/RestaurantDetail";
-
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 export const localOptions = [
   {
     name: "Beachside bar",
@@ -72,8 +72,11 @@ const OptionImage = (props) => (
       }}
       style={{ width: "100%", height: 180 }}
     />
-    <TouchableOpacity style={{ position: "absolute", right: 20, top: 20 }}>
-      <MaterialCommunityIcons name="heart-outline" size={25} color="#fff" />
+    <TouchableOpacity style={{ position: "absolute", right: 10, top: 25 }}>
+      <BouncyCheckbox
+        iconStyle={{ borderColor: "lightgray" }}
+        fillColor="lightgreen"
+      />
     </TouchableOpacity>
   </>
 );

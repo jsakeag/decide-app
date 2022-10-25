@@ -2,8 +2,9 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { Divider } from "react-native-elements";
+import arrayShuffle from "array-shuffle";
 
-const foods = [
+const foods = arrayShuffle([
   {
     title: "Teriyaki Chicken",
     description: "Amazing dish!",
@@ -46,7 +47,7 @@ const foods = [
     image:
       "https://www.simplyrecipes.com/thmb/t0PHmOn0M5y1qBdcHvbDWs182Kc=/1780x1335/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2017__12__2017-12-Chicken-Fried-Rice-2-15ac7014b47b40a1a7c7e20a638f4295.jpg",
   },
-];
+]);
 
 const styles = StyleSheet.create({
   menuItemStyle: {

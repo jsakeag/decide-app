@@ -7,6 +7,8 @@ import SearchItems, { localOptions } from "../components/SearchItems";
 import SearchBar from "../components/SearchBar";
 import { useEffect } from "react";
 import { useState } from "react";
+//import { RotationGesture } from "react-native-gesture-handler/lib/typescript/handlers/gestures/rotationGesture";
+import ViewSuggestions from "../components/restaurantDetail/ViewSuggestions";
 
 const YELP_API_KEY =
   "iKJhoRtWhN6crYpFsAJcd2iz2DLvPMNsitOi88e9rg8UVO-12lK4wzOPU5Js4RA21FPA-SQtomWVa8JibgPFbrN4uUUl6Knr4D4MYud0zwmZToCXgi4XZ_QGpaZBY3Yx";
@@ -23,7 +25,7 @@ export default function Home({ navigation }) {
   console.log(randomCity);
 
   const getOptionsFromYelp = () => {
-    const yelpUrl = `https://vast-basin-15798.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurants&location=${randomCity}`;
+    const yelpUrl = `https://vast-basin-15798.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
 
     const apiOptions = {
       headers: {
@@ -38,7 +40,7 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
     getOptionsFromYelp();
-  }, []);
+  }, [city]);
 
   return (
     <SafeAreaView style={{ backgroundColor: "#eee", flex: 1 }}>
@@ -52,6 +54,7 @@ export default function Home({ navigation }) {
         <SearchBar cityHandler={setCity} />
         <SearchItems optionData={optionData} navigation={navigation} />
       </ScrollView>
+      <ViewSuggestions navigation={navigation} />
       <Categories />
     </SafeAreaView>
   );
