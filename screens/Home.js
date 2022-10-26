@@ -7,6 +7,7 @@ import SearchItems, { localOptions } from "../components/SearchItems";
 import SearchBar from "../components/SearchBar";
 import { useEffect } from "react";
 import { useState } from "react";
+//import { RotationGesture } from "react-native-gesture-handler/lib/typescript/handlers/gestures/rotationGesture";
 import ViewSuggestions from "../components/restaurantDetail/ViewSuggestions";
 
 const YELP_API_KEY =
@@ -16,6 +17,12 @@ export default function Home({ navigation }) {
   console.log("test");
   const [optionData, setOptionData] = useState(localOptions);
   const [city, setCity] = useState("San Francisco");
+
+  const sampleCities = ["LosAngeles", "NewYork", "Seattle"];
+
+  const random = Math.floor(Math.random() * sampleCities.length);
+  const randomCity = sampleCities[random];
+  console.log(randomCity);
 
   const getOptionsFromYelp = () => {
     const yelpUrl = `https://vast-basin-15798.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;

@@ -3,9 +3,6 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import RestaurantDetail from "../screens/RestaurantDetail";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-
 export const localOptions = [
   {
     name: "Beachside bar",
@@ -37,18 +34,6 @@ export const localOptions = [
 ];
 
 export default function SearchItems({ navigation, ...props }) {
-  const dispatch = useDispatch();
-  const selectItem = (item, checkboxValue) =>
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: { ...item, checkboxValue: checkboxValue },
-    });
-  const chosenItems = useSelector(
-    (state) => state.optionReducer.selectedItems.items
-  );
-  const isOptionChosen = (option, chosenItems) =>
-    Boolean(chosenItems.find((item) => item.id === option.id));
-
   return (
     <>
       {props.optionData.map((option, index) => (
@@ -70,13 +55,7 @@ export default function SearchItems({ navigation, ...props }) {
           <View
             style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}
           >
-            <OptionImage
-              item={{ id: option.id, name: option.name }}
-              image={option.image_url}
-              selectItem={selectItem}
-              chosenItems={chosenItems}
-              isOptionChosen={isOptionChosen}
-            />
+            <OptionImage image={option.image_url} />
             <OptionInfo name={option.name} rating={option.rating} />
           </View>
         </TouchableOpacity>
@@ -97,8 +76,6 @@ const OptionImage = (props) => (
       <BouncyCheckbox
         iconStyle={{ borderColor: "lightgray" }}
         fillColor="lightgreen"
-        onPress={(checkboxValue) => props.selectItem(props.item, checkboxValue)}
-        isChecked={props.isOptionChosen(props.item, props.chosenItems)}
       />
     </TouchableOpacity>
   </>

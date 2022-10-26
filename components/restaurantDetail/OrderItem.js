@@ -1,10 +1,8 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-export default function ChosenItem({ item }) {
-  const { id, name } = item;
-  const user = "You";
-  console.log("ChosenItem: ", item);
+export default function OrderItem({ item }) {
+  const { title, price } = item;
   return (
     <View
       style={{
@@ -15,8 +13,8 @@ export default function ChosenItem({ item }) {
         borderBottomColor: "#999",
       }}
     >
-      <Text style={{ fontWeight: "600", fontSize: 16 }}>{name}</Text>
-      <Text style={{ opacity: 0.7, fontSize: 16 }}>{user}</Text>
+      <Text style={{ fontWeight: "600", fontSize: 16 }}>{title}</Text>
+      <Text style={{ opacity: 0.7, fontSize: 16 }}>{price}</Text>
     </View>
   );
 }
