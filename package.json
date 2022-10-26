@@ -16,10 +16,7 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.7",
     "react-redux": "^8.0.4",
-<<<<<<< HEAD
     "redux": "^4.2.0",
-=======
->>>>>>> parent of f3a2458 (Added modal, started firebase (bugs))
     "tslib": "^2.4.0"
   },
   "devDependencies": {
