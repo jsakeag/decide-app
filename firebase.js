@@ -1,4 +1,5 @@
-import firebase from "firebase";
+//import firebase from "firebase";
+import { initializeApp } from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyDONMU7Mq8i65o-MwxnkFXSJxcvZQ1sErA",
   authDomain: "decide-app-no-billing.firebaseapp.com",
@@ -9,7 +10,13 @@ const firebaseConfig = {
   measurementId: "G-H0RDS11VNZ",
 };
 
+//const app = initializeApp(firebaseConfig);
 //if no firebase app, initialize else use existing app
-!firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+//!firebase.apps.length
+//  ? /*firebase.*/ initializeApp(firebaseConfig)
+//  : firebase.app();
 
-export default firebase;
+//export default firebase;
+
+const app = initializeApp(firebaseConfig);
+//export default firebase;

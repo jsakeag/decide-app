@@ -6,19 +6,20 @@ import { fonts } from "react-native-elements/dist/config";
 import ChosenItem from "./ChosenItem";
 import firebase from "../../firebase";
 
-export default function ViewSuggestions() {
+export default function ViewSuggestions({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const items = useSelector((state) => state.optionReducer.selectedItems.items);
   const totalCount = items.length;
 
   const addChoosingToFireBase = () => {
-    const db = firebase.firestore();
+    /*const db = firebase.firestore();
     db.collection("choosings").add({
       items: items,
       restaurantName: restaurantName,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+    });*/
     setModalVisible(false);
+    navigation.navigate("ChoiceFound");
   };
 
   const styles = StyleSheet.create({
