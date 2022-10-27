@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import { fonts } from "react-native-elements/dist/config";
 import ChosenItem from "./ChosenItem";
-import firebase from "../../firebase";
+//import firebase from "../../firebase";
 
 export default function ViewSuggestions({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -12,15 +12,25 @@ export default function ViewSuggestions({ navigation }) {
   const totalCount = items.length;
 
   const addChoosingToFireBase = () => {
-    /*const db = firebase.firestore();
+    {
+      /*const db = firebase.firestore();
     db.collection("choosings").add({
       items: items,
       restaurantName: restaurantName,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });*/
+    }
     setModalVisible(false);
     navigation.navigate("ChoiceFound");
   };
+
+  {
+    /*const deselectItems = (item, checkboxValue) =>
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: { ...item, checkboxValue: checkboxValue },
+    });*/
+  }
 
   const styles = StyleSheet.create({
     modalContainer: {
@@ -107,7 +117,7 @@ export default function ViewSuggestions({ navigation }) {
             alignItems: "center",
             justifyContent: "center",
             flexDirection: "row",
-            //position: "absolute",
+            position: "absolute",
             bottom: 50, //80
             zIndex: 999,
           }}

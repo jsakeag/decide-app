@@ -14,7 +14,7 @@ export default function Search() {
       <ScrollView showVerticalScrollIndicator={false}>
         <SearchItems />
       </ScrollView>
-      <PeopleList />
+      {/*<PeopleList />*/}
     </SafeAreaView>
   );
 }

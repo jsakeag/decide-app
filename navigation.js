@@ -6,6 +6,7 @@ import RestaurantDetail from "./screens/RestaurantDetail";
 import { Provider as ReduxProvider } from "react-redux";
 import configureStore from "./redux/store";
 import ChoiceFound from "./screens/ChoiceFound";
+//import Search from "./screens/Search";
 
 const store = configureStore();
 

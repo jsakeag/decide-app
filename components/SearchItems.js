@@ -46,8 +46,12 @@ export default function SearchItems({ navigation, ...props }) {
   const chosenItems = useSelector(
     (state) => state.optionReducer.selectedItems.items
   );
-  const isOptionChosen = (option, chosenItems) =>
-    Boolean(chosenItems.find((item) => item.id === option.id));
+  //isChecked is set to this. no hook but updates when refresh
+  const isOptionChosen = (option, chosenItems) => {
+    const found = Boolean(chosenItems.find((item) => item.id === option.id));
+    console.log("isOptionChosen: " + found + " // " + option.name);
+    return found;
+  };
 
   return (
     <>
@@ -66,6 +70,7 @@ export default function SearchItems({ navigation, ...props }) {
               categories: option.categories,
             })
           }
+          isOptionChosen={isOptionChosen}
         >
           <View
             style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}

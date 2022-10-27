@@ -14,6 +14,7 @@ export default function SearchBar({ cityHandler, optionData }) {
         onPress={(data, details = null) => {
           console.log(data.description);
           const city = data.description.split(",")[0];
+          console.log(city);
           cityHandler(city);
         }}
         requestUrl={{

@@ -18,7 +18,8 @@ export default function Home({ navigation }) {
   const [city, setCity] = useState("San Francisco");
 
   const getOptionsFromYelp = () => {
-    const yelpUrl = `https://vast-basin-15798.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
+    //https://vast-basin-15798.herokuapp.com/ - put this proxy link before url when using web version
+    const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
 
     const apiOptions = {
       headers: {
@@ -28,7 +29,8 @@ export default function Home({ navigation }) {
 
     return fetch(yelpUrl, apiOptions)
       .then((res) => res.json())
-      .then((json) => setOptionData(json.businesses));
+      .then((json) => setOptionData(json.businesses))
+      .catch((error) => console.log("API fetch failed: " + error));
   };
 
   useEffect(() => {
@@ -39,12 +41,12 @@ export default function Home({ navigation }) {
     <SafeAreaView style={{ backgroundColor: "#eee", flex: 1 }}>
       <View style={{ backgroundColor: "white", padding: 15 }}>
         <HeaderTab title="home" />
+        <SearchBar cityHandler={setCity} />
       </View>
       <ScrollView
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }} //centers container contents to center text
       >
         <HomeText />
-        <SearchBar cityHandler={setCity} />
         <SearchItems optionData={optionData} navigation={navigation} />
       </ScrollView>
       <ViewSuggestions navigation={navigation} />

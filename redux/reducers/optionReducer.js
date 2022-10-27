@@ -21,10 +21,17 @@ let optionReducer = (state = defaultState, action) => {
           ],
         };
       }
-      console.log(newState, "a");
+      console.log(JSON.stringify(newState), "\t");
       return newState;
     }
-
+    case "RESET_CART": {
+      let newState = { ...state };
+      console.log("RESET_CART");
+      newState.selectedItems = {
+        items: [[], action.payload],
+      };
+      return newState;
+    }
     default:
       return state;
   }

@@ -5,7 +5,7 @@ import PeopleList from "../components/PeopleList";
 import FooterQuitConfirm from "../components/FooterQuitConfirm";
 import { Divider } from "react-native-elements";
 import SearchItems from "../components/SearchItems";
-import SuggestionItems from "../components/SuggestionItems";
+import SuggestionItems from "../components/old/SuggestionItems";
 import AddSuggestion from "../components/AddSuggestion";
 
 export default function Suggest() {
