@@ -2,9 +2,8 @@ import React from "react";
 import { View, Text } from "react-native";
 
 export default function ChosenItem({ item }) {
-  const { id, name } = item;
+  const { id, name, price, rating, reviews } = item;
   const user = "You";
-  console.log("ChosenItem: ", item);
   return (
     <View
       style={{

@@ -36,6 +36,15 @@ export const localOptions = [
   },
 ];
 
+//isChecked is set to this. no hook but updates when refresh
+{
+  /*export const isOptionChosen = (option, chosenItems) => {
+  const found = Boolean(chosenItems.find((item) => item.id === option.id));
+  //console.log("isOptionChosen: " + found + " // " + option.name);
+  return found;
+};*/
+}
+
 export default function SearchItems({ navigation, ...props }) {
   const dispatch = useDispatch();
   const selectItem = (item, checkboxValue) =>
@@ -43,16 +52,15 @@ export default function SearchItems({ navigation, ...props }) {
       type: "ADD_TO_CART",
       payload: { ...item, checkboxValue: checkboxValue },
     });
-  const chosenItems = useSelector(
+  {
+    /*const chosenItems = useSelector(
     (state) => state.optionReducer.selectedItems.items
-  );
-  //isChecked is set to this. no hook but updates when refresh
-  const isOptionChosen = (option, chosenItems) => {
-    const found = Boolean(chosenItems.find((item) => item.id === option.id));
-    console.log("isOptionChosen: " + found + " // " + option.name);
-    return found;
-  };
+  );*/
+  }
 
+  /*{
+    props.optionData.map((option, index) => console.log(option));
+  }*/
   return (
     <>
       {props.optionData.map((option, index) => (
@@ -68,19 +76,25 @@ export default function SearchItems({ navigation, ...props }) {
               reviews: option.review_count,
               rating: option.rating,
               categories: option.categories,
+              is_closed: option.is_closed, //
             })
           }
-          isOptionChosen={isOptionChosen}
         >
           <View
             style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}
           >
             <OptionImage
-              item={{ id: option.id, name: option.name }}
+              item={{
+                //when editing this, also edit destructuring in ChosenItem.js
+                id: option.id,
+                name: option.name,
+                price: option.price,
+                rating: option.rating,
+                reviews: option.review_count,
+              }}
               image={option.image_url}
               selectItem={selectItem}
-              chosenItems={chosenItems}
-              isOptionChosen={isOptionChosen}
+              isOptionChosen={option.isChecked}
             />
             <OptionInfo name={option.name} rating={option.rating} />
           </View>
@@ -103,7 +117,7 @@ const OptionImage = (props) => (
         iconStyle={{ borderColor: "lightgray" }}
         fillColor="lightgreen"
         onPress={(checkboxValue) => props.selectItem(props.item, checkboxValue)}
-        isChecked={props.isOptionChosen(props.item, props.chosenItems)}
+        isChecked={props.isOptionChosen}
       />
     </TouchableOpacity>
   </>
