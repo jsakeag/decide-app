@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import { fonts } from "react-native-elements/dist/config";
 import ChosenItem from "./ChosenItem";
-//import firebase from "../../firebase";
+import { firebase } from "../../firebase";
 
 export default function ViewSuggestions({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -13,12 +13,12 @@ export default function ViewSuggestions({ navigation }) {
 
   const addChoosingToFireBase = () => {
     {
-      /*const db = firebase.firestore();
-    db.collection("choosings").add({
-      items: items,
-      restaurantName: restaurantName,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });*/
+      const db = firebase.firestore();
+      db.collection("choosings").add({
+        items: items,
+        restaurantName: restaurantName,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
     }
     setModalVisible(false);
     navigation.navigate("ChoiceFound");
