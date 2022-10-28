@@ -4,24 +4,21 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import { fonts } from "react-native-elements/dist/config";
 import ChosenItem from "./ChosenItem";
-//import firebase from "../../firebase";
+import { db } from "../../firebase";
 
 export default function ViewSuggestions({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const items = useSelector((state) => state.optionReducer.selectedItems.items);
   const totalCount = items.length;
 
-  const addChoosingToFireBase = () => {
-    {
-      /*const db = firebase.firestore();
+  const addToFireBase = () => {
     db.collection("choosings").add({
       items: items,
       restaurantName: restaurantName,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });*/
-    }
+      //createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
     setModalVisible(false);
-    navigation.navigate("ChoiceFound");
+    //navigation.navigate("ChoiceFound");
   };
 
   {
@@ -90,7 +87,7 @@ export default function ViewSuggestions({ navigation }) {
                   width: 300,
                   position: "relative",
                 }}
-                onPress={() => addChoosingToFireBase()}
+                onPress={() => addToFireBase()}
               >
                 <Text style={{ color: "white", fontSize: 20 }}>Continue</Text>
               </TouchableOpacity>

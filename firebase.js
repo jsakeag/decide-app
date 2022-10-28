@@ -1,22 +1,14 @@
-//import firebase from "firebase";
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDONMU7Mq8i65o-MwxnkFXSJxcvZQ1sErA",
-  authDomain: "decide-app-no-billing.firebaseapp.com",
-  projectId: "decide-app-no-billing",
-  storageBucket: "decide-app-no-billing.appspot.com",
-  messagingSenderId: "675493154607",
-  appId: "1:675493154607:web:d7b48cf4b5bbe97fbb1bda",
-  measurementId: "G-H0RDS11VNZ",
+  apiKey: "AIzaSyBJkPBxxvSwOuF9OeQm9phetmNxnxu4Hls",
+  authDomain: "decide-app-no-billing-8385f.firebaseapp.com",
+  projectId: "decide-app-no-billing-8385f",
+  storageBucket: "decide-app-no-billing-8385f.appspot.com",
+  messagingSenderId: "870982563686",
+  appId: "1:870982563686:web:8d9791b2e64f55494dbaa7",
 };
 
-//const app = initializeApp(firebaseConfig);
-//if no firebase app, initialize else use existing app
-//!firebase.apps.length
-//  ? /*firebase.*/ initializeApp(firebaseConfig)
-//  : firebase.app();
-
-//export default firebase;
-
-const app = initializeApp(firebaseConfig);
-//export default firebase;
+export const app = initializeApp(firebaseConfig);
+export const { db } = getFirestore(app);
