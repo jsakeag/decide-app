@@ -6,6 +6,36 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
+export const localOptions = [
+  {
+    name: "Beachside bar",
+    image_url:
+      "https://static.onecms.io/wp-content/uploads/sites/9/2020/04/24/ppp-why-wont-anyone-rescue-restaurants-FT-BLOG0420.jpg",
+    categories: ["Cafe", "Bar"],
+    price: "$$",
+    reviews: 1244,
+    rating: 4.5,
+  },
+  {
+    name: "Benihana",
+    image_url:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudCUyMGludGVyaW9yfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
+    categories: ["Cafe", "Bar"],
+    price: "$$",
+    reviews: 1244,
+    rating: 3.7,
+  },
+  {
+    name: "India's Grill",
+    image_url:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudCUyMGludGVyaW9yfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
+    categories: ["Indian", "Bar"],
+    price: "$$",
+    reviews: 700,
+    rating: 4.9,
+  },
+];
+
 //isChecked is set to this. no hook but updates when refresh
 {
   /*export const isOptionChosen = (option, chosenItems) => {
@@ -15,16 +45,18 @@ import { useSelector } from "react-redux";
 };*/
 }
 
-export default function SearchItems({ navigation, hideCheckbox, ...props }) {
+export default function SearchItems({ navigation, ...props }) {
   const dispatch = useDispatch();
-  const selectItem = (item, checkboxValue) => {
-    console.log(item.price);
-    item.price = item.price ? item.price : "$$";
+  const selectItem = (item, checkboxValue) =>
     dispatch({
       type: "ADD_TO_CART",
       payload: { ...item, checkboxValue: checkboxValue },
     });
-  };
+  {
+    /*const chosenItems = useSelector(
+    (state) => state.optionReducer.selectedItems.items
+  );*/
+  }
 
   /*{
     props.optionData.map((option, index) => console.log(option));
@@ -63,7 +95,6 @@ export default function SearchItems({ navigation, hideCheckbox, ...props }) {
               image={option.image_url}
               selectItem={selectItem}
               isOptionChosen={option.isChecked}
-              hideCheckbox={hideCheckbox}
             />
             <OptionInfo name={option.name} rating={option.rating} />
           </View>
@@ -73,7 +104,7 @@ export default function SearchItems({ navigation, hideCheckbox, ...props }) {
   );
 }
 
-const OptionImage = ({ hideCheckbox, ...props }) => (
+const OptionImage = (props) => (
   <>
     <Image
       source={{
@@ -82,18 +113,12 @@ const OptionImage = ({ hideCheckbox, ...props }) => (
       style={{ width: "100%", height: 180 }}
     />
     <TouchableOpacity style={{ position: "absolute", right: 10, top: 25 }}>
-      {hideCheckbox ? (
-        <></>
-      ) : (
-        <BouncyCheckbox
-          iconStyle={{ borderColor: "lightgray" }}
-          fillColor="lightgreen"
-          onPress={(checkboxValue) =>
-            props.selectItem(props.item, checkboxValue)
-          }
-          isChecked={props.isOptionChosen}
-        />
-      )}
+      <BouncyCheckbox
+        iconStyle={{ borderColor: "lightgray" }}
+        fillColor="lightgreen"
+        onPress={(checkboxValue) => props.selectItem(props.item, checkboxValue)}
+        isChecked={props.isOptionChosen}
+      />
     </TouchableOpacity>
   </>
 );

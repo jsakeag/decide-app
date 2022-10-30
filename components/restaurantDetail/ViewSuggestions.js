@@ -5,29 +5,21 @@ import { useSelector } from "react-redux";
 import { fonts } from "react-native-elements/dist/config";
 import ChosenItem from "./ChosenItem";
 import firebase from "../../firebase";
-import LottieView from "lottie-react-native";
 
 export default function ViewSuggestions({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
-
   const items = useSelector((state) => state.optionReducer.selectedItems.items);
   const totalCount = items.length;
 
   const addToFireBase = () => {
-    setLoading(true);
     const db = firebase.firestore();
-    console.log("FIREBASE CURRENTLY BUGGED");
     db.collection("choosings").add({
       items: items,
       score: 1,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
-    //usually this is wrapped as a promise in a .then() but since firebase is currently bugged I removed it
-    setTimeout(() => {
-      setLoading(false);
-      navigation.navigate("ChoiceFound");
-    }, 2500);
+    setModalVisible(false);
+    //navigation.navigate("ChoiceFound");
   };
 
   {
@@ -96,10 +88,7 @@ export default function ViewSuggestions({ navigation }) {
                   width: 300,
                   position: "relative",
                 }}
-                onPress={() => {
-                  addToFireBase();
-                  setModalVisible(false);
-                }}
+                onPress={() => addToFireBase()}
               >
                 <Text style={{ color: "white", fontSize: 20 }}>Continue</Text>
               </TouchableOpacity>
@@ -155,29 +144,6 @@ export default function ViewSuggestions({ navigation }) {
               </Text>
             </TouchableOpacity>
           </View>
-        </View>
-      ) : (
-        <></>
-      )}
-      {loading ? (
-        <View
-          style={{
-            backgroundColor: "black",
-            position: "absolute",
-            opacity: 0.6,
-            justifyContent: "center",
-            alignItems: "center",
-            height: "110%",
-            width: "100%",
-            zIndex: 999,
-          }}
-        >
-          <LottieView
-            style={{ height: 200 }}
-            source={require("../../assets/animations/scanner.json")}
-            autoPlay
-            speed={3}
-          />
         </View>
       ) : (
         <></>
