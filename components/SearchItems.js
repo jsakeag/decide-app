@@ -18,24 +18,13 @@ import { useSelector } from "react-redux";
 export default function SearchItems({ navigation, hideCheckbox, ...props }) {
   const dispatch = useDispatch();
   const selectItem = (item, checkboxValue) => {
-<<<<<<< HEAD
-=======
     console.log(item.price);
->>>>>>> parent of 927bae5 (Revert "Implemented basic ChoiceFound screen, loading Modal")
     item.price = item.price ? item.price : "$$";
     dispatch({
       type: "ADD_TO_CART",
       payload: { ...item, checkboxValue: checkboxValue },
     });
   };
-<<<<<<< HEAD
-  {
-    /*const chosenItems = useSelector(
-    (state) => state.optionReducer.selectedItems.items
-  );*/
-  }
-=======
->>>>>>> parent of 927bae5 (Revert "Implemented basic ChoiceFound screen, loading Modal")
 
   /*{
     props.optionData.map((option, index) => console.log(option));

@@ -15,28 +15,22 @@ export default function ViewSuggestions({ navigation }) {
   const totalCount = items.length;
 
   const addToFireBase = () => {
-<<<<<<< HEAD
-    console.log(items);
-=======
     setLoading(true);
->>>>>>> parent of 927bae5 (Revert "Implemented basic ChoiceFound screen, loading Modal")
     const db = firebase.firestore();
     console.log("FIREBASE CURRENTLY BUGGED");
-    db.collection("choosings").add({
-      items: items,
-      score: 1,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
-<<<<<<< HEAD
-    setModalVisible(false);
-    navigation.navigate("ChoiceFound");
-=======
-    //usually this is wrapped as a promise in a .then() but since firebase is currently bugged I removed it
-    setTimeout(() => {
-      setLoading(false);
-      navigation.navigate("ChoiceFound");
-    }, 2500);
->>>>>>> parent of 927bae5 (Revert "Implemented basic ChoiceFound screen, loading Modal")
+    db.collection("choosings")
+      .add({
+        items: items,
+        score: 1,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      })
+      .then(() =>
+        //usually this is wrapped as a promise in a .then() but since firebase is currently bugged I removed it
+        setTimeout(() => {
+          setLoading(false);
+          navigation.navigate("ChoiceFound");
+        }, 2500)
+      );
   };
 
   {
