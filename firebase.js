@@ -17,4 +17,7 @@ const firebaseConfig = {
 //  : firebase.app();
 
 firebase.initializeApp(firebaseConfig);
+firebase
+  .firestore()
+  .settings({ experimentalForceLongPolling: true, merge: true });
 export default firebase;

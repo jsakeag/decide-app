@@ -26,7 +26,7 @@ export default function Home({ navigation }) {
 
   const getOptionsFromYelp = () => {
     //https://vast-basin-15798.herokuapp.com/ - put this proxy link before url when using web version
-    const yelpUrl = `https://vast-basin-15798.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
+    const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
 
     const apiOptions = {
       headers: {

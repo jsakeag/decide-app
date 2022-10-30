@@ -12,6 +12,7 @@ export default function ViewSuggestions({ navigation }) {
   const totalCount = items.length;
 
   const addToFireBase = () => {
+    console.log(items);
     const db = firebase.firestore();
     db.collection("choosings").add({
       items: items,
@@ -19,7 +20,7 @@ export default function ViewSuggestions({ navigation }) {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setModalVisible(false);
-    //navigation.navigate("ChoiceFound");
+    navigation.navigate("ChoiceFound");
   };
 
   {

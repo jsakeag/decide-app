@@ -47,11 +47,13 @@ export const localOptions = [
 
 export default function SearchItems({ navigation, ...props }) {
   const dispatch = useDispatch();
-  const selectItem = (item, checkboxValue) =>
+  const selectItem = (item, checkboxValue) => {
+    item.price = item.price ? item.price : "$$";
     dispatch({
       type: "ADD_TO_CART",
       payload: { ...item, checkboxValue: checkboxValue },
     });
+  };
   {
     /*const chosenItems = useSelector(
     (state) => state.optionReducer.selectedItems.items
