@@ -163,24 +163,34 @@ export default function ChoiceFound({ navigation }) {
       <ScrollView style={{ height: 100 }}>
         <SearchItems optionData={lastSuggestions.items} hideCheckbox={true} />
       </ScrollView>
+      <View
+        style={{
+          width: "90%",
+          height: 5,
+          backgroundColor: likedIcon.color,
+          marginTop: 10,
+          alignSelf: "center",
+          borderRadius: 5,
+        }}
+      ></View>
       <View style={{ flexDirection: "row", justifyContent: "center" }}>
         <RatingIcon
           icon={likedIcon.icon}
           color={likedIcon.color}
           onPress={pressLike}
         />
+        <ChoiceIcon icon="close-circle" color="#fcbaaa" onPress={closeButton} />
+
+        <ChoiceButton text="OPEN" color="#8bf6c5" onPress={openButton} />
+        <ChoiceIcon icon="restart" color="#99d7fe" onPress={closeButton} />
         <RatingIcon
           icon={dislikedIcon.icon}
           color={dislikedIcon.color}
           onPress={pressDislike}
         />
-
-        <ChoiceButton text="OPEN" color="#8bf6c5" onPress={openButton} />
-        <ChoiceIcon icon="close-circle" color="#fcbaaa" onPress={closeButton} />
-        <ChoiceIcon icon="restart" color="#99d7fe" onPress={closeButton} />
       </View>
       <LottieView
-        style={{ height: 150, alignSelf: "center" }}
+        style={{ height: 135, alignSelf: "center" }}
         source={require("../assets/animations/cooking.json")}
         autoPlay
         speed={0.5}
@@ -195,6 +205,7 @@ const RatingIcon = ({ icon, color, onPress }) => (
       height: 35,
       marginTop: 10,
       marginRight: 10,
+      marginLeft: 10,
       backgroundColor: "#fff",
       alignItems: "center",
       justifyContent: "center",
@@ -210,8 +221,8 @@ const ChoiceButton = ({ text, color, onPress }) => (
     style={{
       height: 35,
       marginTop: 10,
-      marginRight: 0,
-      marginLeft: 50,
+      marginRight: 10,
+      marginLeft: 10,
       backgroundColor: color,
       alignItems: "center",
       justifyContent: "center",
@@ -239,7 +250,8 @@ const ChoiceIcon = ({ icon, color, onPress }) => (
     style={{
       height: 35,
       marginTop: 10,
-      marginLeft: 5,
+      marginLeft: 10,
+      marginRight: 10,
       backgroundColor: color,
       alignItems: "center",
       justifyContent: "center",
