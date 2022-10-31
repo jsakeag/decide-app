@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import RestaurantDetail from "../screens/RestaurantDetail";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useDispatch } from "react-redux";
@@ -59,8 +58,9 @@ export default function SearchItems({ navigation, hideCheckbox, ...props }) {
                 price: option.price,
                 rating: option.rating,
                 reviews: option.review_count,
+                image_url: option.image_url,
+                url: option.url,
               }}
-              image={option.image_url}
               selectItem={selectItem}
               isOptionChosen={option.isChecked}
               hideCheckbox={hideCheckbox}
@@ -77,7 +77,7 @@ const OptionImage = ({ hideCheckbox, ...props }) => (
   <>
     <Image
       source={{
-        uri: props.image,
+        uri: props.item.image_url,
       }}
       style={{ width: "100%", height: 180 }}
     />

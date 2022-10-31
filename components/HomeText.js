@@ -12,9 +12,10 @@ export default function HomeText() {
       }}
     >
       <Text style={{ textAlign: "center" }}>
-        tap anywhere to create a suggestion room! (invite people here or join by
-        messages)
+        search for restaurants then suggest them by pressing the checkbox!
       </Text>
     </View>
   );
 }
+
+//(invite people here or join by messages)

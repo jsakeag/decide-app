@@ -12,9 +12,7 @@ export default function SearchBar({ cityHandler, optionData }) {
           key: "AIzaSyCBKhfz6LR-vNkh-oXb3HZekDbZSLW9KX8",
         }}
         onPress={(data, details = null) => {
-          console.log(data.description);
           const city = data.description.split(",")[0];
-          console.log(city);
           cityHandler(city);
         }}
         requestUrl={{

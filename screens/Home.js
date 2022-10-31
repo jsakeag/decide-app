@@ -64,7 +64,6 @@ export default function Home({ navigation }) {
     return fetch(yelpUrl, apiOptions)
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.businesses);
         return json.businesses;
       })
       .then((businesses) => {
@@ -78,11 +77,10 @@ export default function Home({ navigation }) {
           });
         });
         console.log(newBusinesses);
-        console.log(chosenItems);
         return newBusinesses;
       })
       .then((newBusinesses) => setOptionData(newBusinesses))
-      .catch((error) => console.log("API fetch failed: " + error));
+      .catch((error) => console.log("API fetch failed - " + error));
   };
 
   useEffect(() => {
@@ -92,7 +90,7 @@ export default function Home({ navigation }) {
   return (
     <SafeAreaView style={{ backgroundColor: "#eee", flex: 1 }}>
       <View style={{ backgroundColor: "white", padding: 15 }}>
-        <HeaderTab title="home" />
+        <HeaderTab title="search!" />
         <SearchBar cityHandler={setCity} />
       </View>
       <ScrollView

@@ -17,7 +17,6 @@ export default function ViewSuggestions({ navigation }) {
   const addToFireBase = () => {
     setLoading(true);
     const db = firebase.firestore();
-    console.log("FIREBASE CURRENTLY BUGGED");
     db.collection("choosings")
       .add({
         items: items,
@@ -29,8 +28,9 @@ export default function ViewSuggestions({ navigation }) {
         setTimeout(() => {
           setLoading(false);
           navigation.navigate("ChoiceFound");
-        }, 2500)
-      );
+        }, 100)
+      )
+      .catch((err) => console.log(err));
   };
 
   {
@@ -104,7 +104,7 @@ export default function ViewSuggestions({ navigation }) {
                   setModalVisible(false);
                 }}
               >
-                <Text style={{ color: "white", fontSize: 20 }}>Continue</Text>
+                <Text style={{ color: "white", fontSize: 20 }}>Decide!</Text>
               </TouchableOpacity>
             </View>
           </View>

@@ -4,14 +4,17 @@ import {
   SafeAreaView,
   ScrollView,
   unstable_enableLogBox,
+  Linking,
 } from "react-native";
 import React, { useEffect, useState } from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import LottieView from "lottie-react-native";
 import SearchItems from "../components/SearchItems";
 import firebase from "../firebase";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-export default function ChoiceFound() {
+export default function ChoiceFound({ navigation }) {
   const items = useSelector((state) => state.optionReducer.selectedItems.items);
   const [lastSuggestions, setLastSuggestions] = useState({
     items: [
@@ -44,6 +47,24 @@ export default function ChoiceFound() {
       },
     ],
   });
+  const [likedIcon, setLikedIcon] = useState({
+    icon: "thumb-up-outline",
+    color: "#ddd",
+  });
+  const [dislikedIcon, setDislikedIcon] = useState({
+    icon: "thumb-down-outline",
+    color: "#ddd",
+  });
+
+  const pressLike = () => {
+    setLikedIcon({ icon: "thumb-up", color: "#8bf6c5" });
+    setDislikedIcon({ icon: "thumb-down-outline", color: "#ddd" });
+  };
+
+  const pressDislike = () => {
+    setDislikedIcon({ icon: "thumb-down", color: "#fcbaaa" });
+    setLikedIcon({ icon: "thumb-up-outline", color: "#ddd" });
+  };
   //math operations used in choice algorithm
   const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
   const round = (number) => Math.round(number * 100) / 100;
@@ -91,19 +112,19 @@ export default function ChoiceFound() {
   };
 
   let chosenItemIndex = getChosenItemIndex();
-  console.log(chosenItemIndex);
 
-  const chosenRestaurant = items[chosenItemIndex].name;
+  const chosenRestaurant = items[chosenItemIndex];
   const totalCount = items.length;
 
   useEffect(() => {
     const db = firebase.firestore();
     const unsubscribe = db
-      .collection("orders")
+      .collection("choosings")
       .orderBy("createdAt", "desc")
       .limit(1)
       .onSnapshot((snapshot) => {
         snapshot.docs.map((doc) => {
+          //console.log("DOC.DATA: " + doc.data());
           setLastSuggestions(doc.data());
         });
       });
@@ -111,6 +132,13 @@ export default function ChoiceFound() {
     return () => unsubscribe();
   }, []);
 
+  const openButton = () => {
+    Linking.openURL(chosenRestaurant.url);
+  };
+
+  const closeButton = () => {
+    navigation.navigate("Home");
+  };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <LottieView
@@ -128,19 +156,116 @@ export default function ChoiceFound() {
         }}
       >
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-          Your chosen restaurant is {chosenRestaurant} out of {totalCount}{" "}
+          Your chosen restaurant is {chosenRestaurant.name} out of {totalCount}{" "}
           options!
         </Text>
       </View>
-      <ScrollView>
+      <ScrollView style={{ height: 100 }}>
         <SearchItems optionData={lastSuggestions.items} hideCheckbox={true} />
       </ScrollView>
+      <View style={{ flexDirection: "row", justifyContent: "center" }}>
+        <RatingIcon
+          icon={likedIcon.icon}
+          color={likedIcon.color}
+          onPress={pressLike}
+        />
+        <RatingIcon
+          icon={dislikedIcon.icon}
+          color={dislikedIcon.color}
+          onPress={pressDislike}
+        />
+
+        <ChoiceButton text="OPEN" color="#8bf6c5" onPress={openButton} />
+        <ChoiceIcon icon="close-circle" color="#fcbaaa" onPress={closeButton} />
+        <ChoiceIcon icon="restart" color="#99d7fe" onPress={closeButton} />
+      </View>
       <LottieView
-        style={{ height: 200, alignSelf: "center" }}
+        style={{ height: 150, alignSelf: "center" }}
         source={require("../assets/animations/cooking.json")}
         autoPlay
         speed={0.5}
       />
     </SafeAreaView>
   );
+}
+
+const RatingIcon = ({ icon, color, onPress }) => (
+  <TouchableOpacity
+    style={{
+      height: 35,
+      marginTop: 10,
+      marginRight: 10,
+      backgroundColor: "#fff",
+      alignItems: "center",
+      justifyContent: "center",
+      position: "relative",
+    }}
+    onPress={onPress}
+  >
+    <MaterialCommunityIcons name={icon} size={35} color={color} />
+  </TouchableOpacity>
+);
+const ChoiceButton = ({ text, color, onPress }) => (
+  <TouchableOpacity
+    style={{
+      height: 35,
+      marginTop: 10,
+      marginRight: 0,
+      marginLeft: 50,
+      backgroundColor: color,
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 5,
+      borderRadius: 30,
+      width: 100,
+      position: "relative",
+    }}
+    onPress={onPress}
+  >
+    <Text
+      style={{
+        lineHeight: -1,
+        color: "white",
+        fontSize: 15,
+      }}
+    >
+      {text}
+    </Text>
+  </TouchableOpacity>
+);
+
+const ChoiceIcon = ({ icon, color, onPress }) => (
+  <TouchableOpacity
+    style={{
+      height: 35,
+      marginTop: 10,
+      marginLeft: 5,
+      backgroundColor: color,
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 0,
+      borderRadius: 30,
+      width: 35,
+      position: "relative",
+    }}
+    onPress={onPress}
+  >
+    <MaterialCommunityIcons name={icon} size={25} color="#fff" />
+  </TouchableOpacity>
+);
+
+{
+  /*const BarrierText = ({ sideMargins }) => {
+  <Text
+    style={{
+      marginLeft: sideMargins,
+      marginRight: sideMargins,
+      marginTop: 10,
+      fontSize: 30,
+      color: "#bbb",
+    }}
+  >
+    |
+  </Text>;
+};*/
 }
