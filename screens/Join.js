@@ -13,8 +13,7 @@ import LottieView from "lottie-react-native";
 import HeaderTabs from "../components/join/HeaderTabs";
 
 const Join = ({ navigation }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [joinCodeInput, setJoinCodeInput] = useState("");
   const [activeTab, setActiveTab] = useState("Join");
 
   const auth = firebase.auth();
@@ -62,7 +61,7 @@ const Join = ({ navigation }) => {
     return code;
   };
 
-  const code = gemerateCode();
+  const code = generateCode();
 
   return (
     <>
@@ -85,35 +84,31 @@ const Join = ({ navigation }) => {
         <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
       </SafeAreaView>
       <KeyboardAvoidingView style={styles.container} behavior="padding">
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Email"
-            placeholderTextColor="#aaa"
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Password"
-            placeholderTextColor="#aaa"
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-            style={styles.input}
-            secureTextEntry
-          />
-        </View>
+        {activeTab === "Join" ? (
+          <>
+            <View style={styles.inputContainer}>
+              <TextInput
+                placeholder="Enter join code here!"
+                placeholderTextColor="#aaa"
+                onChangeText={(text) => setJoinCodeInput(text)}
+                style={styles.input}
+              />
+            </View>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={loginAnonymously} style={styles.button}>
-            <Text style={styles.buttonText}>Login</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleSignUp}
-            style={[styles.button, styles.buttonOutline]}
-          >
-            <Text style={styles.buttonOutlineText}>Register</Text>
-          </TouchableOpacity>
-        </View>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                onPress={loginAnonymously}
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>Join</Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        ) : (
+          <View style={styles.headerText}>
+            <Text style={styles.buttonText}>{code}</Text>
+          </View>
+        )}
       </KeyboardAvoidingView>
     </>
   );
@@ -160,9 +155,9 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
   },
-  buttonOutlineText: {
-    color: "#0782F9",
+  headerText: {
+    color: "black",
     fontWeight: "700",
-    fontSize: 16,
+    fontSize: 30,
   },
 });
