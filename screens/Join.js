@@ -11,7 +11,6 @@ import React, { useEffect, useState } from "react";
 import firebase from "../firebase";
 import LottieView from "lottie-react-native";
 import HeaderTabs from "../components/join/HeaderTabs";
-import QRCode from "react-native-qrcode-svg";
 
 const Join = ({ navigation }) => {
   const [joinCodeInput, setJoinCodeInput] = useState("");
@@ -107,7 +106,6 @@ const Join = ({ navigation }) => {
           </>
         ) : (
           <View style={styles.headerText}>
-            <QRCode value="http://awesome.link.qr" />
             <Text style={styles.buttonText}>{code}</Text>
           </View>
         )}
