@@ -1,5 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
+import firebase from "../firebase";
 
 export default function HomeText() {
   return (
@@ -12,7 +13,8 @@ export default function HomeText() {
       }}
     >
       <Text style={{ textAlign: "center" }}>
-        search for restaurants then suggest them by pressing the checkbox!
+        search for restaurants then suggest them by pressing the checkbox! Your
+        user ID: {firebase.auth().currentUser?.uid}
       </Text>
     </View>
   );

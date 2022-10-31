@@ -3,7 +3,6 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import RestaurantDetail from "../screens/RestaurantDetail";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 
 //isChecked is set to this. no hook but updates when refresh
 {
