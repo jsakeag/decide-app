@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import About from "../components/restaurantDetail/About";
 import { Divider } from "react-native-elements";

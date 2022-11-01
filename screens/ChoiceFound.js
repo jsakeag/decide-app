@@ -1,18 +1,14 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  ScrollView,
-  unstable_enableLogBox,
-  Linking,
-} from "react-native";
+import { View, Text, SafeAreaView, ScrollView, Linking } from "react-native";
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import LottieView from "lottie-react-native";
 import SearchItems from "../components/SearchItems";
 import firebase from "../firebase";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import {
+  RatingIcon,
+  ChoiceButton,
+  ChoiceIcon,
+} from "../components/general/Buttons";
 
 export default function ChoiceFound({ navigation }) {
   const items = useSelector((state) => state.optionReducer.selectedItems.items);
@@ -88,7 +84,21 @@ export default function ChoiceFound({ navigation }) {
         ((0.001 * (item.rating - 2.5)) / 2.5) * clamp(item.reviews, 0, 1000);
       let priceFactor =
         -0.5 * (item.price !== undefined ? item.price.length : 2);
-      let itemWeight = round(ratingFactor + reviewsAccuracy + priceFactor);
+      let relevance = (2 * clamp(item.distance, 0, 5000)) / 5000;
+      let itemWeight = round(
+        ratingFactor + reviewsAccuracy + priceFactor + relevance
+      );
+      {
+        /*console.log(
+        "relavance of " +
+          item.name +
+          ": " +
+          relevance +
+          "(actual distance: " +
+          item.distance +
+          ")"
+      );*/
+      }
       weightTable.push(itemWeight);
       total += itemWeight;
     });
@@ -198,73 +208,6 @@ export default function ChoiceFound({ navigation }) {
     </SafeAreaView>
   );
 }
-
-const RatingIcon = ({ icon, color, onPress }) => (
-  <TouchableOpacity
-    style={{
-      height: 35,
-      marginTop: 10,
-      marginRight: 10,
-      marginLeft: 10,
-      backgroundColor: "#fff",
-      alignItems: "center",
-      justifyContent: "center",
-      position: "relative",
-    }}
-    onPress={onPress}
-  >
-    <MaterialCommunityIcons name={icon} size={35} color={color} />
-  </TouchableOpacity>
-);
-const ChoiceButton = ({ text, color, onPress }) => (
-  <TouchableOpacity
-    style={{
-      height: 35,
-      marginTop: 10,
-      marginRight: 10,
-      marginLeft: 10,
-      backgroundColor: color,
-      alignItems: "center",
-      justifyContent: "center",
-      padding: 5,
-      borderRadius: 30,
-      width: 100,
-      position: "relative",
-    }}
-    onPress={onPress}
-  >
-    <Text
-      style={{
-        lineHeight: -1,
-        color: "white",
-        fontSize: 15,
-      }}
-    >
-      {text}
-    </Text>
-  </TouchableOpacity>
-);
-
-const ChoiceIcon = ({ icon, color, onPress }) => (
-  <TouchableOpacity
-    style={{
-      height: 35,
-      marginTop: 10,
-      marginLeft: 10,
-      marginRight: 10,
-      backgroundColor: color,
-      alignItems: "center",
-      justifyContent: "center",
-      padding: 0,
-      borderRadius: 30,
-      width: 35,
-      position: "relative",
-    }}
-    onPress={onPress}
-  >
-    <MaterialCommunityIcons name={icon} size={25} color="#fff" />
-  </TouchableOpacity>
-);
 
 {
   /*const BarrierText = ({ sideMargins }) => {

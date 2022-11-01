@@ -42,7 +42,7 @@ export default function SearchItems({ navigation, hideCheckbox, ...props }) {
               reviews: option.review_count,
               rating: option.rating,
               categories: option.categories,
-              is_closed: option.is_closed, //
+              url: option.url,
             })
           }
         >
@@ -59,6 +59,7 @@ export default function SearchItems({ navigation, hideCheckbox, ...props }) {
                 reviews: option.review_count,
                 image_url: option.image_url,
                 url: option.url,
+                distance: option.distance,
               }}
               selectItem={selectItem}
               isOptionChosen={option.isChecked}
