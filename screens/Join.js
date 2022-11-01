@@ -76,6 +76,17 @@ const Join = ({ navigation }) => {
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         {activeTab === "Join" ? (
           <>
+            <Text
+              style={{
+                color: "white",
+                fontSize: 30,
+                top: 140,
+                position: "absolute",
+                fontWeight: "1500",
+              }}
+            >
+              Decide!
+            </Text>
             <View style={styles.inputContainer}>
               <TextInput
                 placeholder="Enter join code here!"
