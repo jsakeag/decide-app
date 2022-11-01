@@ -10,8 +10,7 @@ import { useState } from "react";
 import ViewSuggestions from "../components/restaurantDetail/ViewSuggestions";
 import { useSelector } from "react-redux";
 import PeopleList from "../components/home/PeopleList";
-const YELP_API_KEY =
-  "iKJhoRtWhN6crYpFsAJcd2iz2DLvPMNsitOi88e9rg8UVO-12lK4wzOPU5Js4RA21FPA-SQtomWVa8JibgPFbrN4uUUl6Knr4D4MYud0zwmZToCXgi4XZ_QGpaZBY3Yx";
+import { yelpApiKey } from "../credentials";
 
 export const localOptions = [
   {
@@ -53,12 +52,12 @@ export default function Home({ navigation }) {
   );
 
   const getOptionsFromYelp = () => {
-    //https://vast-basin-15798.herokuapp.com/ - put this proxy link before url when using web version
+    //put proxy link before url when using web version
     const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}&categories=${categories}`;
 
     const apiOptions = {
       headers: {
-        Authorization: `Bearer ${YELP_API_KEY}`,
+        Authorization: `Bearer ${yelpApiKey}`,
       },
     };
 

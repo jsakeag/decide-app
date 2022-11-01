@@ -3,13 +3,14 @@ import React from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { googlePlacesAutoCompleteApiKey, herokuAddress } from "../credentials";
 
 export default function SearchBar({ cityHandler, optionData }) {
   return (
     <View style={{ marginTop: 15, flexDirection: "row" }}>
       <GooglePlacesAutocomplete
         query={{
-          key: "AIzaSyCBKhfz6LR-vNkh-oXb3HZekDbZSLW9KX8",
+          key: googlePlacesAutoCompleteApiKey,
         }}
         onPress={(data, details = null) => {
           const city = data.description.split(",")[0];
@@ -17,7 +18,7 @@ export default function SearchBar({ cityHandler, optionData }) {
         }}
         requestUrl={{
           useOnPlatform: "web", // or "all"
-          url: "https://vast-basin-15798.herokuapp.com/https://maps.googleapis.com/maps/api", // or any proxy server that hits https://maps.googleapis.com/maps/api
+          url: `${herokuAddress}https://maps.googleapis.com/maps/api`, // or any proxy server that hits https://maps.googleapis.com/maps/api
           headers: {
             Authorization: `an auth token`, // if required for your proxy
           },
