@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, Linking } from "react-native";
 import RestaurantDetail from "../screens/RestaurantDetail";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useDispatch } from "react-redux";
@@ -27,6 +27,7 @@ export default function SearchItems({ navigation, hideCheckbox, ...props }) {
   /*{
     props.optionData.map((option, index) => console.log(option));
   }*/
+
   return (
     <>
       {props.optionData.map((option, index) => (
@@ -34,17 +35,19 @@ export default function SearchItems({ navigation, hideCheckbox, ...props }) {
           key={index}
           activeOpacity={1}
           style={{ marginBottom: 30 }}
-          onPress={() =>
-            navigation.navigate("RestaurantDetail", {
-              name: option.name,
-              image: option.image_url,
-              price: option.price,
-              reviews: option.review_count,
-              rating: option.rating,
-              categories: option.categories,
-              url: option.url,
-            })
-          }
+          onPress={() => {
+            !hideCheckbox
+              ? navigation.navigate("RestaurantDetail", {
+                  name: option.name,
+                  image: option.image_url,
+                  price: option.price,
+                  reviews: option.review_count,
+                  rating: option.rating,
+                  categories: option.categories,
+                  url: option.url,
+                })
+              : Linking.openURL(option.url);
+          }}
         >
           <View
             style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}
@@ -60,12 +63,17 @@ export default function SearchItems({ navigation, hideCheckbox, ...props }) {
                 image_url: option.image_url,
                 url: option.url,
                 distance: option.distance,
+                categories: option.categories,
               }}
               selectItem={selectItem}
               isOptionChosen={option.isChecked}
               hideCheckbox={hideCheckbox}
             />
-            <OptionInfo name={option.name} rating={option.rating} />
+            <OptionInfo
+              name={option.name}
+              rating={option.rating}
+              cats={option.categories.map((cat) => cat.title).join(" • ")}
+            />
           </View>
         </TouchableOpacity>
       ))}
@@ -109,7 +117,7 @@ const OptionInfo = (props) => (
   >
     <View>
       <Text style={{ fontSize: 15, fontWeight: "bold" }}>{props.name}</Text>
-      <Text style={{ fontSize: 13, color: "gray" }}>30-45 • min</Text>
+      <Text style={{ fontSize: 13, color: "gray" }}>{props.cats}</Text>
     </View>
     <View
       style={{

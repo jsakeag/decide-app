@@ -6,7 +6,7 @@ export default function Intro({ navigation }) {
   const startSwitchTimer = () => {
     setTimeout(() => {
       navigation.replace("Join");
-    }, 2000);
+    }, 100);
   };
   startSwitchTimer();
   return (

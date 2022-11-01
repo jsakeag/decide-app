@@ -21,7 +21,7 @@ let optionReducer = (state = defaultState, action) => {
           ],
         };
       }
-      console.log(newState.selectedItems, "\t");
+      //console.log(newState.selectedItems, "\t");
       return newState;
     }
     case "RESET_CART": {

@@ -6,12 +6,15 @@ import { fonts } from "react-native-elements/dist/config";
 import ChosenItem from "./ChosenItem";
 import firebase from "../../firebase";
 import LottieView from "lottie-react-native";
+import decisionAlgorithm from "../../decisionAlgorithm";
 
 export default function ViewSuggestions({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const items = useSelector((state) => state.optionReducer.selectedItems.items);
+
+  const chosenRestaurant = decisionAlgorithm({ items });
   const totalCount = items.length;
 
   const addToFireBase = () => {
@@ -20,8 +23,9 @@ export default function ViewSuggestions({ navigation }) {
     db.collection("choosings")
       .add({
         items: items,
-        score: 1,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        chosenRestaurant: chosenRestaurant,
+        score: 1,
       })
       .then(() =>
         //usually this is wrapped as a promise in a .then() but since firebase is currently bugged I removed it
