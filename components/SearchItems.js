@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, TouchableOpacity, Linking } from "react-native";
 import RestaurantDetail from "../screens/RestaurantDetail";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
@@ -23,7 +23,6 @@ export default function SearchItems({ navigation, hideCheckbox, ...props }) {
       payload: { ...item, checkboxValue: checkboxValue },
     });
   };
-
   /*{
     props.optionData.map((option, index) => console.log(option));
   }*/
@@ -66,7 +65,7 @@ export default function SearchItems({ navigation, hideCheckbox, ...props }) {
                 categories: option.categories,
               }}
               selectItem={selectItem}
-              isOptionChosen={option.isChecked}
+              isChecked={option.isChecked}
               hideCheckbox={hideCheckbox}
             />
             <OptionInfo
@@ -81,30 +80,35 @@ export default function SearchItems({ navigation, hideCheckbox, ...props }) {
   );
 }
 
-const OptionImage = ({ hideCheckbox, ...props }) => (
-  <>
-    <Image
-      source={{
-        uri: props.item.image_url,
-      }}
-      style={{ width: "100%", height: 180 }}
-    />
-    <TouchableOpacity style={{ position: "absolute", right: 10, top: 25 }}>
-      {hideCheckbox ? (
-        <></>
-      ) : (
-        <BouncyCheckbox
-          iconStyle={{ borderColor: "lightgray" }}
-          fillColor="lightgreen"
-          onPress={(checkboxValue) =>
-            props.selectItem(props.item, checkboxValue)
-          }
-          isChecked={props.isOptionChosen}
-        />
-      )}
-    </TouchableOpacity>
-  </>
-);
+const OptionImage = ({ hideCheckbox, ...props }) => {
+  //need to finish debugging this (checks)
+  const [check, setCheck] = useState(false);
+  return (
+    <>
+      <Image
+        source={{
+          uri: props.item.image_url,
+        }}
+        style={{ width: "100%", height: 180 }}
+      />
+      <TouchableOpacity style={{ position: "absolute", right: 10, top: 25 }}>
+        {hideCheckbox ? (
+          <></>
+        ) : (
+          <BouncyCheckbox
+            iconStyle={{ borderColor: "lightgray" }}
+            fillColor="lightgreen"
+            onPress={(checkboxValue) => {
+              props.selectItem(props.item, checkboxValue);
+              setCheck(checkboxValue);
+            }}
+            isChecked={check}
+          />
+        )}
+      </TouchableOpacity>
+    </>
+  );
+};
 
 const OptionInfo = (props) => (
   <View

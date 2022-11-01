@@ -136,7 +136,7 @@ export default function ViewSuggestions({ navigation }) {
             justifyContent: "center",
             flexDirection: "row",
             position: "absolute",
-            bottom: 50, //80
+            bottom: 80, //80
             zIndex: 999,
           }}
         >

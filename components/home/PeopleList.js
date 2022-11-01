@@ -3,13 +3,13 @@ import { View, Text, Image, ScrollView } from "react-native";
 
 const images = [
   {
-    image: require("../assets/avatars/bee.png"),
+    image: require("../../assets/avatars/bee.png"),
   },
   {
-    image: require("../assets/avatars/cat.png"),
+    image: require("../../assets/avatars/cat.png"),
   },
   {
-    image: require("../assets/avatars/cow.png"),
+    image: require("../../assets/avatars/cow.png"),
   },
 ];
 
@@ -18,7 +18,6 @@ export default function PeopleList() {
     <View
       style={{
         marginTop: 5,
-        backgroundColor: "#fff",
         paddingVertical: 10,
         paddingLeft: 20,
       }}
