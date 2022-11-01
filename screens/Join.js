@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import firebase from "../firebase";
 import LottieView from "lottie-react-native";
 import HeaderTabs from "../components/join/HeaderTabs";
-import QRCode from "react-native-qrcode-svg";
+import Invite from "../components/join/Invite";
 
 const Join = ({ navigation }) => {
   const [joinCodeInput, setJoinCodeInput] = useState("");
@@ -52,17 +52,6 @@ const Join = ({ navigation }) => {
         // ...
       });
   };
-
-  const generateCode = () => {
-    let code = "";
-    let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    for (let i = 0; i < 4; i++) {
-      code += letters[Math.floor(Math.random() * letters.length)];
-    }
-    return code;
-  };
-
-  const code = generateCode();
 
   return (
     <>
@@ -106,10 +95,7 @@ const Join = ({ navigation }) => {
             </View>
           </>
         ) : (
-          <>
-            <QRCode value={code} size={200} style={styles.qrCode} />
-            <Text style={styles.headerText}>{code}</Text>
-          </>
+          <Invite />
         )}
       </KeyboardAvoidingView>
     </>
@@ -156,14 +142,5 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "700",
     fontSize: 16,
-  },
-  headerText: {
-    color: "white",
-    fontWeight: "700",
-    fontSize: 45,
-    marginTop: 15,
-  },
-  qrCode: {
-    marginTop: -15,
   },
 });

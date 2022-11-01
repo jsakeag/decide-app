@@ -1,5 +1,6 @@
 let defaultState = {
   selectedItems: { items: [], restaurantName: "" },
+  code: "XXXX",
 };
 
 let optionReducer = (state = defaultState, action) => {
@@ -32,6 +33,13 @@ let optionReducer = (state = defaultState, action) => {
       };
       return newState;
     }
+    case "INITIALIZE_CODE": {
+      let newState = { ...state };
+      console.log("INITIALIZE_CODE");
+      newState.code = action.value;
+      return newState;
+    }
+
     default:
       return state;
   }

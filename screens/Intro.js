@@ -1,6 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 import LottieView from "lottie-react-native";
+import { useDispatch } from "react-redux";
 
 export default function Intro({ navigation }) {
   const startSwitchTimer = () => {
@@ -9,6 +10,18 @@ export default function Intro({ navigation }) {
     }, 100);
   };
   startSwitchTimer();
+
+  let code = "";
+  let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  for (let i = 0; i < 4; i++) {
+    code += letters[Math.floor(Math.random() * letters.length)];
+  }
+
+  const dispatch = useDispatch();
+  dispatch({
+    type: "INITIALIZE_CODE",
+    value: code,
+  });
   return (
     <>
       <LottieView

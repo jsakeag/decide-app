@@ -66,7 +66,7 @@ export const ChoiceIcon = ({ icon, color, size, sideMargins, onPress }) => {
       }}
       onPress={onPress}
     >
-      <MaterialCommunityIcons name={icon} size={size - 10} color="#fff" />
+      <MaterialCommunityIcons name={icon} size={size * 0.7} color="#fff" />
     </TouchableOpacity>
   );
 };
