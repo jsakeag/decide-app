@@ -109,7 +109,7 @@ export default function ViewSuggestions({ navigation }) {
                 }}
               >
                 <Text style={{ color: "white", fontSize: 20 }}>
-                  Decide! (0/1)
+                  Decide! (2/3)
                 </Text>
               </TouchableOpacity>
             </View>

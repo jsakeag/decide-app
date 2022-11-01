@@ -15,11 +15,12 @@ export default function HomeText() {
             margin: 10,
             marginHorizontal: 30,
             justifyContent: "center",
+            backgroundColor: "#fff",
           }}
         >
           <Text style={{ textAlign: "center" }}>
-            search for restaurants then suggest them by pressing the checkbox!
-            Your user ID: {firebase.auth().currentUser?.uid}
+            suggest restaurants by pressing the checkbox! (invite people here or
+            join by messages)
           </Text>
           <View style={{ position: "absolute", right: -25, top: -7 }}>
             <ChoiceIcon
@@ -36,5 +37,3 @@ export default function HomeText() {
     </>
   );
 }
-
-//(invite people here or join by messages)

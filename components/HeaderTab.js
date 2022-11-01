@@ -1,58 +1,74 @@
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { ChoiceIcon } from "./general/Buttons";
-import Invite from "./join/Invite";
+import HomeText from "./HomeText";
+import firebase from "../firebase";
 
 export default function HeaderTab(props) {
-  const [inviteModalVisible, setInviteModalVisible] = useState(false);
+  const [helpModalVisible, setHelpModalVisible] = useState(false);
+  const [settingsModalVisible, setSettingsModalVisible] = useState(false);
 
   const styles = StyleSheet.create({
     modalContainer: {
       flex: 1,
-      justifyContent: "flex-end",
       backgroundColor: "rgba(0,0,0,0.7)",
     },
-
-    modalCheckoutContainer: {
-      backgroundColor: "white",
-      padding: 16,
-      height: 500,
-      borderWidth: 1,
-    },
-
-    restaurantName: {
-      textAlign: "center",
-      fontWeight: "600",
-      fontSize: 18,
-      marginBottom: 10,
-    },
-
-    subtotalContainer: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      marginTop: 15,
-    },
-
-    subtotalText: {
-      textAlign: "left",
-      fontWeight: "600",
-      fontSize: 15,
-      marginBottom: 10,
+    center: {
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 30,
     },
     xButton: { position: "absolute", right: 25, top: 25 },
   });
 
-  const inviteModalContent = () => {
+  const helpModalContent = () => {
     return (
       <>
         <View style={styles.modalContainer}>
-          <Invite />
+          <View style={styles.center}>
+            <Text style={{ color: "white" }}>Welcome to Decide!</Text>
+            <Text style={{ color: "white" }}>
+              Search for restaurants then suggest them by pressing the checkbox
+              on the right!
+            </Text>
+            <Text style={{ color: "white" }}>
+              Click on restaurants for more info. After your group is done
+              suggesting, press Decide!
+            </Text>
+            <Text style={{ color: "white" }}>
+              (invite people here or join by messages)
+            </Text>
+          </View>
           <View style={styles.xButton}>
             <ChoiceIcon
               icon="alpha-x"
               color="#ddd"
               size={25}
-              onPress={() => setInviteModalVisible(false)}
+              onPress={() => setHelpModalVisible(false)}
+            />
+          </View>
+        </View>
+      </>
+    );
+  };
+
+  const settingsModalContent = () => {
+    return (
+      <>
+        <View style={styles.modalContainer}>
+          <View style={styles.center}>
+            <Text style={{ color: "white" }}>Settings coming soon!</Text>
+            <Text style={{ color: "white" }}>
+              User ID: {firebase.auth().currentUser?.uid}
+            </Text>
+          </View>
+          <View style={styles.xButton}>
+            <ChoiceIcon
+              icon="alpha-x"
+              color="#ddd"
+              size={25}
+              onPress={() => setSettingsModalVisible(false)}
             />
           </View>
         </View>
@@ -64,10 +80,17 @@ export default function HeaderTab(props) {
     <>
       <Modal
         animationType="slide"
-        visible={inviteModalVisible}
+        visible={helpModalVisible}
         transparent={true}
       >
-        {inviteModalContent()}
+        {helpModalContent()}
+      </Modal>
+      <Modal
+        animationType="slide"
+        visible={settingsModalVisible}
+        transparent={true}
+      >
+        {settingsModalContent()}
       </Modal>
       <View>
         <View
@@ -82,14 +105,19 @@ export default function HeaderTab(props) {
           </View>
           <View style={{ flexDirection: "row" }}>
             <ChoiceIcon
-              icon="account-plus"
+              icon="help"
+              color="#fcbaaa"
+              size={30}
+              sideMargins={1}
+              onPress={() => setHelpModalVisible(true)}
+            />
+            <ChoiceIcon
+              icon="cog"
               color="#fcbaaa"
               size={30}
               sideMargins={0}
-              onPress={() => setInviteModalVisible(true)}
+              onPress={() => setSettingsModalVisible(true)}
             />
-            <ChoiceIcon icon="help" color="#fcbaaa" size={30} sideMargins={1} />
-            <ChoiceIcon icon="cog" color="#fcbaaa" size={30} sideMargins={0} />
           </View>
         </View>
         {/*<BorderLine />*/}

@@ -11,6 +11,8 @@ import {
 } from "../components/general/Buttons";
 
 export default function ChoiceFound({ navigation }) {
+  const [likeRatio, setLikeRatio] = useState(9);
+
   const [choice, setChoice] = useState({
     name: "Beachside bar",
     image_url:
@@ -45,11 +47,17 @@ export default function ChoiceFound({ navigation }) {
   const pressLike = () => {
     setLikedIcon({ icon: "thumb-up", color: "#8bf6c5" });
     setDislikedIcon({ icon: "thumb-down-outline", color: "#ddd" });
+    if (likeRatio < 9) {
+      setLikeRatio(likeRatio + 1);
+    }
   };
 
   const pressDislike = () => {
     setDislikedIcon({ icon: "thumb-down", color: "#fcbaaa" });
     setLikedIcon({ icon: "thumb-up-outline", color: "#ddd" });
+    if (likeRatio > 0) {
+      setLikeRatio(likeRatio - 1);
+    }
   };
 
   useEffect(() => {
@@ -111,7 +119,7 @@ export default function ChoiceFound({ navigation }) {
       </ScrollView>
       <View
         style={{
-          width: "90%",
+          width: `${likeRatio * 10}%`,
           height: 5,
           backgroundColor: likedIcon.color,
           marginTop: 10,
