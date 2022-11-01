@@ -46,6 +46,7 @@ export const localOptions = [
 export default function Home({ navigation }) {
   const [optionData, setOptionData] = useState(localOptions);
   const [city, setCity] = useState("San Francisco");
+  const [categories, setCategories] = useState("All");
 
   const chosenItems = useSelector(
     (state) => state.optionReducer.selectedItems.items
@@ -53,7 +54,7 @@ export default function Home({ navigation }) {
 
   const getOptionsFromYelp = () => {
     //https://vast-basin-15798.herokuapp.com/ - put this proxy link before url when using web version
-    const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
+    const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}&categories=${categories}`;
 
     const apiOptions = {
       headers: {
@@ -85,7 +86,7 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
     getOptionsFromYelp();
-  }, [city]);
+  }, [city, categories]);
 
   return (
     <SafeAreaView style={{ backgroundColor: "#eee", flex: 1 }}>
@@ -100,7 +101,7 @@ export default function Home({ navigation }) {
         <SearchItems optionData={optionData} navigation={navigation} />
       </ScrollView>
       <ViewSuggestions navigation={navigation} />
-      <Categories />
+      <Categories categoryHandler={setCategories} />
     </SafeAreaView>
   );
 }

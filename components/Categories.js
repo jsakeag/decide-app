@@ -1,39 +1,46 @@
 import React from "react";
-import { View, Text, Image, ScrollView } from "react-native";
+import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 
 //Food category buttons
 const items = [
   {
-    image: require("../assets/images/shopping-bag.png"),
-    text: "Pick-up",
+    image: require("../assets/images/deals.png"),
+    text: "All",
+    terms: "All",
   },
   {
-    image: require("../assets/images/soft-drink.png"),
-    text: "Soft Drinks",
+    image: require("../assets/images/wine-drink.jpg"),
+    text: "Bars",
+    terms: "bars",
+  },
+  {
+    image: require("../assets/images/food-court.jpg"),
+    text: "Food Court",
+    terms: "food_court",
   },
   {
     image: require("../assets/images/bread.png"),
-    text: "Bakery Items",
+    text: "Bakeries",
+    terms: "bakeries",
   },
   {
     image: require("../assets/images/fast-food.png"),
-    text: "Fast Foods",
-  },
-  {
-    image: require("../assets/images/deals.png"),
-    text: "Deals",
+    text: "Fast Food",
+    terms: "hotdogs",
   },
   {
     image: require("../assets/images/coffee.png"),
     text: "Coffee & Tea",
+    terms: "coffee,tea",
   },
   {
     image: require("../assets/images/desserts.png"),
     text: "Desserts",
+    terms: "deserts",
   },
 ];
 
-export default function Categories() {
+export default function Categories(props) {
   return (
     <View
       style={{
@@ -45,7 +52,11 @@ export default function Categories() {
     >
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {items.map((item, index) => (
-          <View key={index} style={{ alignItems: "center", marginRight: 30 }}>
+          <TouchableOpacity
+            key={index}
+            style={{ alignItems: "center", marginRight: 30 }}
+            onPress={() => props.categoryHandler(item.terms)}
+          >
             <Image
               source={item.image}
               style={{
@@ -55,7 +66,7 @@ export default function Categories() {
               }}
             />
             <Text style={{ fontSize: 13, fontWeight: "900" }}>{item.text}</Text>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>
