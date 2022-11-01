@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
+import { ChoiceIcon } from "./general/Buttons";
 
 export default function HeaderTab(props) {
   return (
@@ -15,8 +16,14 @@ export default function HeaderTab(props) {
           <HeaderTitle title={props.title} />
         </View>
         <View style={{ flexDirection: "row" }}>
-          <HeaderButton text="?" />
-          <HeaderButton text="S" />
+          <ChoiceIcon
+            icon="account-plus"
+            color="#fcbaaa"
+            size={30}
+            sideMargins={0}
+          />
+          <ChoiceIcon icon="help" color="#fcbaaa" size={30} sideMargins={1} />
+          <ChoiceIcon icon="cog" color="#fcbaaa" size={30} sideMargins={0} />
         </View>
       </View>
       {/*<BorderLine />*/}
@@ -33,21 +40,6 @@ const HeaderTitle = (props) => (
     >
       {props.title}
     </Text>
-  </View>
-);
-
-const HeaderButton = (props) => (
-  <View>
-    <TouchableOpacity
-      style={{
-        backgroundColor: "#f5f5f5",
-        paddingVertical: 6,
-        paddingHorizontal: 6,
-        borderRadius: 30,
-      }}
-    >
-      <Text style={{ fontSize: 15, fontWeight: "900" }}>{props.text}</Text>
-    </TouchableOpacity>
   </View>
 );
 

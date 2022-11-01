@@ -20,7 +20,7 @@ export default function About(props) {
       <RestaurantImage image={image} />
       <View>
         <RestaurantName name={name} />
-        <View style={{ position: "absolute", right: 10 }}>
+        <View style={{ position: "absolute", right: 10, marginTop: 10 }}>
           <ChoiceIcon
             icon="arrow-top-right-bold-outline"
             color="#99d7fe"

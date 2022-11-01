@@ -7,7 +7,6 @@ export const RatingIcon = ({ icon, color, onPress }) => (
   <TouchableOpacity
     style={{
       height: 35,
-      marginTop: 10,
       marginRight: 10,
       marginLeft: 10,
       backgroundColor: "#fff",
@@ -24,7 +23,6 @@ export const ChoiceButton = ({ text, color, onPress }) => (
   <TouchableOpacity
     style={{
       height: 35,
-      marginTop: 10,
       marginRight: 10,
       marginLeft: 10,
       backgroundColor: color,
@@ -49,15 +47,15 @@ export const ChoiceButton = ({ text, color, onPress }) => (
   </TouchableOpacity>
 );
 
-export const ChoiceIcon = ({ icon, color, size, onPress }) => {
+export const ChoiceIcon = ({ icon, color, size, sideMargins, onPress }) => {
   size = size ? size : 35;
+  sideMargins = sideMargins ? 10 : sideMargins;
   return (
     <TouchableOpacity
       style={{
         height: 35,
-        marginTop: 10,
-        marginLeft: 10,
-        marginRight: 10,
+        marginLeft: sideMargins,
+        marginRight: sideMargins,
         backgroundColor: color,
         alignItems: "center",
         justifyContent: "center",

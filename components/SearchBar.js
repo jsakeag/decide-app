@@ -22,7 +22,11 @@ export default function SearchBar({ cityHandler, optionData }) {
             Authorization: `an auth token`, // if required for your proxy
           },
         }}
-        placeholder="Search"
+        placeholder="Enter location, terms, etc."
+        textInputProps={{
+          placeholderTextColor: "#aaa",
+          fontSize: 15,
+        }}
         styles={{
           textInput: {
             backgroundColor: "#eee",

@@ -183,7 +183,13 @@ export default function ChoiceFound({ navigation }) {
           borderRadius: 5,
         }}
       ></View>
-      <View style={{ flexDirection: "row", justifyContent: "center" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          marginTop: 10,
+        }}
+      >
         <RatingIcon
           icon={likedIcon.icon}
           color={likedIcon.color}

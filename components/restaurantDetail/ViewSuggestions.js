@@ -92,7 +92,7 @@ export default function ViewSuggestions({ navigation }) {
               <TouchableOpacity
                 style={{
                   marginTop: 20,
-                  backgroundColor: "black",
+                  backgroundColor: "#8bf6c5",
                   alignItems: "center",
                   padding: 13,
                   borderRadius: 30,
@@ -104,7 +104,9 @@ export default function ViewSuggestions({ navigation }) {
                   setModalVisible(false);
                 }}
               >
-                <Text style={{ color: "white", fontSize: 20 }}>Decide!</Text>
+                <Text style={{ color: "white", fontSize: 20 }}>
+                  Decide! (0/1)
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
