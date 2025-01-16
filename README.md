@@ -16,6 +16,6 @@
 </p>
 
 ## Tech Stack
-
+expo version ^46.0.16
 
 
