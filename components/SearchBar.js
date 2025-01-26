@@ -3,14 +3,13 @@ import React from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { googlePlacesAutoCompleteApiKey, herokuAddress } from "../credentials";
 
 export default function SearchBar({ cityHandler, optionData }) {
   return (
     <View style={{ marginTop: 15, flexDirection: "row" }}>
       <GooglePlacesAutocomplete
         query={{
-          key: googlePlacesAutoCompleteApiKey,
+          key: process.env.GOOGLE_PLACES_AUTOCOMPLETE_API_KEY,
         }}
         onPress={(data, details = null) => {
           const city = data.description.split(",")[0];
@@ -18,9 +17,9 @@ export default function SearchBar({ cityHandler, optionData }) {
         }}
         requestUrl={{
           useOnPlatform: "web", // or "all"
-          url: `${herokuAddress}https://maps.googleapis.com/maps/api`, // or any proxy server that hits https://maps.googleapis.com/maps/api
+          url: `https://maps.googleapis.com/maps/api`, // or any proxy server that hits https://maps.googleapis.com/maps/api
           headers: {
-            Authorization: `an auth token`, // if required for your proxy
+            Authorization: `an auth token`, // if required for your proxy?
           },
         }}
         placeholder="Enter location, terms, etc."

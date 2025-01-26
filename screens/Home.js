@@ -10,7 +10,6 @@ import { useState } from "react";
 import ViewSuggestions from "../components/restaurantDetail/ViewSuggestions";
 import { useSelector } from "react-redux";
 import PeopleList from "../components/home/PeopleList";
-import { yelpApiKey } from "../credentials";
 
 export const localOptions = [
   {
@@ -52,12 +51,11 @@ export default function Home({ navigation }) {
   );
 
   const getOptionsFromYelp = () => {
-    //put proxy link before url when using web version
     const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}&categories=${categories}`;
 
     const apiOptions = {
       headers: {
-        Authorization: `Bearer ${yelpApiKey}`,
+        Authorization: `Bearer ${process.env.YELP_API_KEY}`,
       },
     };
 

@@ -23,4 +23,4 @@
 - Redux 4.2.0
 - Yelp API
 - Google Places API
-- Heroku
+- Heroku (deleted)

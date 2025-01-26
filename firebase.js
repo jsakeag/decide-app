@@ -1,11 +1,10 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
-import { firebaseApiKey } from "./credentials";
 const firebaseConfig = {
   //databaseURL: "https://decide-app-no-billing-8385f.firebaseio.com",
 
-  apiKey: firebaseApiKey,
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "decide-app-no-billing-8385f.firebaseapp.com",
   projectId: "decide-app-no-billing-8385f",
   storageBucket: "decide-app-no-billing-8385f.appspot.com",

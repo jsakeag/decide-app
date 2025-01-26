@@ -2,9 +2,10 @@ import React from "react";
 import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 
 //Food category buttons
+//npx expo install babel-plugin-module-resolver | install manually to resolve
 const items = [
   {
-    image: require("../assets/images/deals.png"),
+    image: require("../assets/images/wine-drink.jpg"),
     text: "All",
     terms: "All",
   },
